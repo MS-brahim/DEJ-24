@@ -12,7 +12,7 @@
   <body>
         <!-- start navbar  -->
       <nav class="navbar navbar-expand-md navbar-dark bg-warning">
-          <a class="navbar-brand" href="index.php">Déj-24</a>
+          <a class="navbar-brand" href="index.php"> <img src="images/logo.png" alt=" Déj-24" width="90"></a>
           <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
               aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
                       <a class="nav-link" href="index.php">Accueil <span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item active">
-                      <a class="nav-link" href="add.php">Ajoute des repas</a>
+                      <a class="nav-link" href="add.php">Ajoute une plat</a>
                   </li>
               </ul>
           </div>
@@ -31,22 +31,37 @@
       <!-- end navbar  -->
       <!-- start contient  -->
       <section class="container my-5">
-            <center><h2 class="py-2">Ajouter des repas</h2></center>
-            <form action="">
+            <center><h2 class="py-2">Ajouter des plats</h2></center>
+            <form action="" class="card text-left p-5">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="">Nom de repas <span class="text-warning">*</span></label>
-                            <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                            <label for="">Nom de plat <span class="text-warning">*</span></label>
+                            <input type="text" name="title" class="form-control" placeholder="Ex: Pizza, Burger, ...">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="">Prix <span class="text-warning">*</span></label>
+                            <input type="text" name="price" class="form-control" placeholder="00.00 Dhs">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="">Nom de repas <span class="text-warning">*</span></label>
-                            <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                            <label for="">L'image de plat <span class="text-warning">*</span></label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Télécharger</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input">
+                                    <label class="custom-file-label" >Choissez une image</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <button class="btn btn-primary w-25">Ajouter</button>
             </form>
       </section>
       <!-- end contient  -->
