@@ -34,14 +34,13 @@
       <!-- start contient -->
       <section class="container-fluid my-5">
         <center><h2 class="py-3 mb-3 bg-light">Choisissez votre plat</h2></center>
-        <input type="search" name="" class="form-control mb-4 w-25" placeholder="Recherche">
         <div class="row">
             <?php
-                $sql ="SELECT * FROM foods ORDER BY RAND() LIMIT 2";
+                $sql ="SELECT * FROM foods ORDER BY RAND() LIMIT 8";
                 if($result = $conn->query($sql)){
                     while($row = $result->fetch_assoc()){?>
                 <div class="col-sm-3">
-                    <div class="card text-left">
+                    <div class="card text-left my-3">
                         <img class="card-img-top" src="images/<?php echo $row['image'] ?>" alt="<?php $row['image'] ?>">
                         <div class="card-body">
                             <h4 class="card-title"><?php echo $row['title'] ?></h4>
@@ -54,44 +53,51 @@
                                     <form class="modal-content" method="POST" action="order.php?O_ID=<?php echo $row['id'] ?>">
                                         <div class="modal-header">
                                             <h6 class="modal-title">Remplissez les champs pour compléter la demande</h6>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                       <label for="">Nom <span class="text-warning"> *</span></label>
-                                                      <input type="text" name="fname" id="fname" class="form-control" placeholder="entrez votre nom"/>
+                                                      <input type="text" name="fname" id="fname" class="form-control" placeholder="entrez votre nom" required>
                                                       <small id="helpfname" class="text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                       <label for="">Prénom <span class="text-warning"> *</span></label>
-                                                      <input type="text" name="lname" id="lname" class="form-control" placeholder="entrez votre prénom"/>
+                                                      <input type="text" name="lname" id="lname" class="form-control" placeholder="entrez votre prénom" required>
                                                       <small id="helplname" class="text-danger"></small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                      <label for="">Email <span class="text-warning"> *</span></label>
+                                                      <input type="email" name="email" id="email" class="form-control" placeholder="entrez votre adresse email" required>
+                                                      <small id="helpEmail" class="text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                       <label for="">Numéro de téléphone <span class="text-warning"> *</span></label>
-                                                      <input type="text" name="phone" id="phone" class="form-control" placeholder="212 XXX XX XX XX"/>
+                                                      <input type="text" name="phone" id="phone" class="form-control" placeholder="212 XXX XX XX XX" required>
                                                       <small id="helpPhone" class="text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                       <label for="">Ville <span class="text-warning"> *</span></label>
-                                                      <input type="text" name="city" id="city" class="form-control" placeholder="entrez votre ville actuel"/>
+                                                      <input type="text" name="city" id="city" class="form-control" placeholder="entrez votre ville actuel" required>
                                                       <small id="helpCity" class="text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                       <label for="">Adresse actuel <span class="text-warning"> *</span></label>
-                                                      <input type="text" name="address" id="address" class="form-control" placeholder="entrez votre adress actuel"/>
+                                                      <input type="text" name="address" id="address" class="form-control" placeholder="entrez votre adress actuel" required>
                                                       <small id="helpAddress" class="text-danger"></small>
                                                     </div>
                                                 </div>
@@ -106,9 +112,11 @@
                         </div>
                     </div>
                 </div>
-            <?php } }  
-            // $date = date("Y-m-d", strtotime("+15 day") );
-            //  echo $date;
+            <?php } }
+            // for ($i=0; $i < 15; $i++) { 
+            //     $date = date("d", strtotime("+".$i."day") );
+            //     echo $date ."<br>";
+            // }  
             ?>
         </div>
       </section>
@@ -161,7 +169,6 @@
                 return false;
             }         
         });
-        
     });
     </script>
   </body>

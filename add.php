@@ -1,3 +1,22 @@
+<?php
+include_once "config.php";
+session_start();
+if (isset($_POST['add'])) {
+    $title = htmlspecialchars($_POST['title']);
+    $price = htmlspecialchars($_POST['price']);
+    $image = htmlspecialchars($_POST['image']);
+
+    if (empty($title) or empty($price) or empty($image)) {
+        header('location:add.php');
+    }else {
+       $sql = "INSERT INTO foods (title, price, image)
+        VALUES ('$title', '$price', '$image')"; 
+        if ($result = mysqli_query($conn,$sql)) {
+            $_SESSION['msg'] = "Élément ajouté avec succès";
+        }
+    }
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -30,23 +49,36 @@
       </nav>
       <!-- end navbar  -->
       <!-- start contient  -->
-      <section class="container my-5">
+      <section class="container my-5 col-sm-4">
             <center><h2 class="py-2">Ajouter des plats</h2></center>
-            <form action="" class="card text-left p-5">
+            <?php
+                if(isset($_SESSION['msg'])){ ?>
+                <div class="alert alert-success text-center">
+                    <?php echo $_SESSION['msg']; ?>
+                </div>
+                <?php
+                unset($_SESSION['msg']);
+                } else { ?>
+                    <div class="alert alert-danger text-center">
+                        Remplissez les champs 
+                    </div>
+                <?php }
+            ?>
+            <form  method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>" class="card text-left p-5">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-12">
                         <div class="form-group">
                             <label for="">Nom de plat <span class="text-warning">*</span></label>
                             <input type="text" name="title" class="form-control" placeholder="Ex: Pizza, Burger, ...">
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-12">
                         <div class="form-group">
                             <label for="">Prix <span class="text-warning">*</span></label>
                             <input type="text" name="price" class="form-control" placeholder="00.00 Dhs">
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-12">
                         <div class="form-group">
                             <label for="">L'image de plat <span class="text-warning">*</span></label>
                             <div class="input-group mb-3">
@@ -54,14 +86,14 @@
                                     <span class="input-group-text">Télécharger</span>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input">
+                                    <input type="file" name="image" class="custom-file-input">
                                     <label class="custom-file-label" >Choissez une image</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary w-25">Ajouter</button>
+                <button class="btn btn-primary w-25" name="add">Ajouter</button>
             </form>
       </section>
       <!-- end contient  -->
